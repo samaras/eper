@@ -366,10 +366,10 @@ pi(P) when is_pid(P) ->
       [] -> case process_info(P, initial_call) of
               {_, {proc_lib,init_p,5}} -> proc_lib:translate_initial_call(P);
               {_,MFA} -> MFA;
-              undefined -> dead
+              undefined -> P
             end;
       {_,Nam} -> Nam;
-      undefined -> dead
+      undefined -> P
   catch 
     error:badarg -> node(P)
   end;
